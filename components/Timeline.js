@@ -1,8 +1,5 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Tooltip } from "@/components/ui/tooltip";
-import { Image } from "@/components/ui/image";
 
 const events = [
   { year: "1492", title: "Llegada de Colón", description: "Cristóbal Colón llega a América en su primer viaje.", image: "/images/columbus.jpg" },
@@ -34,22 +31,18 @@ export default function Timeline() {
         <div className="w-1 bg-gray-400 h-full absolute left-1/2 transform -translate-x-1/2"></div>
         {events.map((event, index) => (
           <div key={index} className="w-full flex justify-center mb-10 relative">
-            <Tooltip content={event.description}>
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                className="relative flex flex-col items-center w-1/3"
-                onMouseEnter={() => setHoveredEvent(event)}
-                onMouseLeave={() => setHoveredEvent(null)}
-              >
-                <Card className="p-4 bg-white shadow-lg rounded-xl">
-                  <CardContent className="flex flex-col items-center">
-                    <Image src={event.image} alt={event.title} className="w-32 h-32 rounded-md mb-2" />
-                    <p className="text-lg font-semibold">{event.year}</p>
-                    <p className="text-sm text-center">{event.title}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </Tooltip>
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              className="relative flex flex-col items-center w-1/3"
+              onMouseEnter={() => setHoveredEvent(event)}
+              onMouseLeave={() => setHoveredEvent(null)}
+            >
+              <div className="p-4 bg-white shadow-lg rounded-xl text-center">
+                <img src={event.image} alt={event.title} className="w-32 h-32 rounded-md mb-2" />
+                <p className="text-lg font-semibold">{event.year}</p>
+                <p className="text-sm">{event.title}</p>
+              </div>
+            </motion.div>
           </div>
         ))}
       </div>
